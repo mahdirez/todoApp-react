@@ -47,10 +47,12 @@ function App() {
     let filterTodo = [...toDo].filter((item) => item.id !== updateData.id);
     let update = [...filterTodo, updateData];
     setToDo(update);
+    SetUpdateData("");
   }
   return (
-    <div className=" text-white h-screen  flex item-center justify-center container mx-auto flex-col gap-8">
-      {updateData && updateData ? (
+    <div className=" text-white h-min-screen flex item-center justify-center container mx-auto flex-col gap-8">
+      <h1 className="text-3xl text-center">ToDO List</h1>
+      { updateData ? (
         <div className="w-full flex justify-between gap-8 text-xl text-black">
           <input
             type="text"
@@ -59,12 +61,12 @@ function App() {
             onChange={(e) => changeTask(e)}
           />
           <button
-            className="w-1/3 bg-green-500 text-white"
+            className="w-1/3 bg-yellow-400 text-white"
             onClick={updateTask}
           >
             Update
           </button>
-          <button className="w-1/3 bg-green-500 text-white">Cancel</button>
+          <button className="w-1/3 bg-yellow-400 text-white" onClick={cancelUpdate}>Cancel</button>
         </div>
       ) : (
         <form className="w-full flex justify-between gap-8 text-xl text-black">
@@ -75,16 +77,16 @@ function App() {
             onChange={(e) => SetNewTask(e.target.value)}
           />
           <button
-            className="w-1/3 bg-green-500 text-white"
+            className="w-1/3 bg-yellow-400 text-white"
             type="submit"
             onClick={addTask}
           >
-            Add Task
+            Add Todo
           </button>
         </form>
       )}
 
-      {toDo && toDo.length ? "" : "no task"}
+      { toDo.length ? "" : <p className="text-xl">NO TASK</p>}
       {toDo &&
         toDo
           .sort((a, b) => (a.id > b.id ? 1 : -1))
@@ -92,12 +94,12 @@ function App() {
             return (
               <>
                 <div
-                  className="bg-gray-800 flex justify-between items-center p-4"
+                  className="bg-gray-600 flex justify-between items-center p-4"
                   key={item.id}
                 >
                   <div className="flex items-center gap-3 text-xl">
                     <span className=" text-gray-500 text-2xl">{index + 1}</span>
-                    <span className={item.status ? "line-through" : ""}>
+                    <span className={item.status ? "line-through text-gray-400" : ""}>
                       {item.title}
                     </span>
                   </div>
